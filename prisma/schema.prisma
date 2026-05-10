@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  category    String
+  goal        Int
+  description String
+  fullname    String
+  email       String   
+  phone       String
+  cni         String?   // Ancien champ
+  cniFront    String?   // Photo CNI Recto
+  cniBack     String?   // Photo CNI Verso
+  isVerified  Boolean  @default(false) // Statut KYC
+  image       String   
+  socialLink  String?  
+  raised      Int      @default(0)
+  daysLeft    Int      @default(30)
+  donorsCount Int      @default(0)
+  approved    Boolean  @default(false)
+  suspended   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  userId      String?  
+  user        User?    @relation(fields: [userId], references: [id])
+  
+  donations   Donation[]
+}
+
+model Donation {
+  id            String   @id @default(uuid())
+  amount        Int
+  network       String   
+  donorPhone    String
+  transactionId String   @unique
+  publicName    String?  
+  message       String?  
+  status        String   @default("PENDING") 
+  createdAt     DateTime @default(now())
+  
+  projectId     String
+  project       Project  @relation(fields: [projectId], references: [id])
+}
+
+model Influencer {
+  id          String   @id @default(uuid())
+  username    String   @unique 
+  fullname    String
+  email       String   @unique 
+  bio         String
+  cniFront    String?   
+  cniBack     String?   
+  isVerified  Boolean  @default(false)
+  phone       String   
+  image       String   
+  socialLink  String?  
+  raised      Int      @default(0)
+  donorsCount Int      @default(0)
+  approved    Boolean  @default(false) 
+  suspended   Boolean  @default(false) 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  userId      String?  @unique
+  user        User?    @relation(fields: [userId], references: [id])
+  
+  donations InfluencerDonation[]
+}
+
+model InfluencerDonation {
+  id            String   @id @default(uuid())
+  amount        Int
+  network       String   
+  donorPhone    String
+  transactionId String   @unique
+  publicName    String?  
+  message       String?  
+  status        String   @default("PENDING")
+  createdAt     DateTime @default(now())
+  
+  influencerId  String
+  influencer    Influencer  @relation(fields: [influencerId], references: [id])
+}
+
+model Advertisement {
+  id          String   @id @default(uuid())
+  location    String   
+  type        String   
+  content     String   
+  link        String?  
+  displayLimit Int     @default(1) 
+  delayMs     Int      @default(5000) 
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Config {
+  id              String   @id @default("global")
+  commissionFee   Float    @default(5.0) 
+  technicalFee    Float    @default(2.0) // Frais opérateurs/PayGate
+  maintenanceMode Boolean  @default(false)
+  updatedAt       DateTime @updatedAt
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String   
+  name          String?
+  role          String   @default("USER") 
+  referralCode  String   @unique @default(cuid())
+  referredById  String?
+  referredBy    User?    @relation("UserReferrals", fields: [referredById], references: [id])
+  referrals     User[]   @relation("UserReferrals")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  projects   Project[]
+  influencer Influencer?
+}
+
+model Withdrawal {
+  id            String   @id @default(uuid())
+  amount        Int      // Montant NET reçu par l'utilisateur
+  platformFee   Int      // Commission HOASSI
+  techFee       Int      // Frais techniques opérateurs
+  grossAmount   Int      // Montant total brut avant déductions
+  status        String   @default("PENDING") 
+  method        String   
+  destination   String   
+  type          String   
+  referenceId   String   
+  requesterName String   
+  userEmail     String   
+  adminNotes    String?  
+  invoiceUrl    String?  // Lien vers le reçu PDF/Image
+  createdAt     DateTime @default(now())
+  processedAt   DateTime?
+}
