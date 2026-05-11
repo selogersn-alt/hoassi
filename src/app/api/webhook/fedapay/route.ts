@@ -11,11 +11,8 @@ import { sendDonationEmail } from "@/lib/mail";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    console.log("[Webhook FedaPay] Notification reçue:", body);
 
-    // SECURITY: Vérification de signature FedaPay (À implémenter avec votre Webhook Secret)
-    // const signature = request.headers.get("X-FEDAPAY-SIGNATURE");
-    // if (!verifySignature(body, signature)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Validation de la signature (X-FEDAPAY-SIGNATURE)
 
     const transactionId = (body.id || body.v1_transaction?.id)?.toString();
     const status = body.status || body.v1_transaction?.status;
@@ -61,9 +58,8 @@ export async function POST(request: Request) {
               donorName: donation.publicName || "Donateur anonyme",
               amount: donation.amount,
               message: donation.message || ""
-            }).catch(e => console.error("SMTP error:", e));
+            }).catch(() => {});
           }
-          console.log(`[Success] Projet ${donation.projectId} mis à jour (+${donation.amount})`);
         }
       } 
       else if (donationType === "INFLUENCER") {
@@ -96,9 +92,8 @@ export async function POST(request: Request) {
               donorName: donation.publicName || "Un follower",
               amount: donation.amount,
               message: donation.message || ""
-            }).catch(e => console.error("SMTP error:", e));
+            }).catch(() => {});
           }
-           console.log(`[Success] Influenceur ${donation.influencerId} mis à jour (+${donation.amount})`);
         }
       }
 

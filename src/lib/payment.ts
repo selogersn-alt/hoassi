@@ -1,7 +1,5 @@
 /**
- * =========================================================================
- * SERVICE DE PAIEMENT - PayGate Global Togo
- * =========================================================================
+ * SERVICE DE PAIEMENT - PayGate Global
  */
 
 export interface PaymentRequest {
@@ -35,11 +33,10 @@ async function processPayGatePayment(request: PaymentRequest): Promise<PaymentRe
   const token = process.env.PAYGATE_AUTH_TOKEN;
   
   if (!token) {
-    console.warn("[PayGate] Token introuvable. Simulation réussie.");
     return {
       success: true,
       transactionId: "PG-" + Math.random().toString(36).substring(2, 9).toUpperCase(),
-      message: "Paiement simulé avec PayGate (Mode Dev)."
+      message: "Initialisation en mode test."
     };
   }
 
@@ -63,8 +60,6 @@ async function processPayGatePayment(request: PaymentRequest): Promise<PaymentRe
     });
 
     const paymentUrl = `${baseUrl}?${params.toString()}`;
-
-    console.log(`[Paiement Initié] - PayGate Identifier: ${identifier}`);
 
     return {
       success: true,

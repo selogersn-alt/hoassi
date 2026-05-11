@@ -15,7 +15,7 @@ const PRIMARY_COLOR = "#ff5a5f"; // Coral
 const FOOTER_TEXT = "HOASSI - L'excellence Crowdfunding au Togo. Propulsé par Digitalh.";
 
 /**
- * Base template for joyful emails
+ * Modèle HTML de base pour les notifications
  */
 const getHtmlTemplate = (title: string, content: string, ctaText?: string, ctaUrl?: string) => `
 <!DOCTYPE html>

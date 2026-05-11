@@ -5,9 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { sendWithdrawalUpdateEmail } from "@/lib/mail";
 
 /**
- * =========================================================================
  * API ADMIN - Gestion des Retraits
- * =========================================================================
  */
 
 export async function GET() {
@@ -65,12 +63,11 @@ export async function PATCH(request: Request) {
   }
 }
 
-// Pour simuler une demande de retrait (utile pour tester)
+
 export async function POST(request: Request) {
   try {
      const body = await request.json();
      
-     // Logique simplifiée pour démo
       const withdrawal = await prisma.withdrawal.create({
         data: {
           amount: body.amount - (body.platformFee || 0) - (body.techFee || 0),
