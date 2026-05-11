@@ -43,12 +43,14 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
               <span className="text-2xl font-black text-primary">
                 {new Intl.NumberFormat('fr-FR').format(project.raised)} <span className="text-sm font-bold text-slate-500">XOF</span>
               </span>
-              <span className="text-slate-500 font-bold text-sm bg-slate-100 px-2 py-0.5 rounded-md">{progress}%</span>
+              <span className="text-slate-500 font-black text-sm bg-primary/10 px-2 py-0.5 rounded-md flex items-center gap-1">
+                {progress}% ❤️
+              </span>
             </div>
             
             <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-primary transition-all duration-1000 ease-out rounded-full"
+                className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ease-out rounded-full"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
@@ -56,8 +58,8 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
 
           <div className="mt-5 grid grid-cols-2 gap-4 text-sm border-t border-slate-100 pt-5">
             <div className="flex flex-col">
-              <span className="text-slate-500 font-medium mb-1">Objectif</span>
-              <span className="text-slate-800 font-bold">{new Intl.NumberFormat('fr-FR').format(project.goal)} XOF</span>
+              <span className="text-slate-500 font-bold text-[10px] uppercase tracking-widest mb-1">Objectif</span>
+              <span className="text-slate-800 font-black">{new Intl.NumberFormat('fr-FR').format(project.goal)} XOF</span>
             </div>
             <div className="flex flex-col items-end">
               <span className="text-slate-500 font-medium mb-1">Contributeurs</span>
@@ -73,14 +75,14 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
         
         {/* Bottom Action Hint */}
         <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between group-hover:bg-primary/5 transition-colors">
-          <span className="text-sm font-medium text-slate-500 flex items-center gap-1">
+          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             J-{project.daysLeft}
           </span>
-          <span className="text-primary font-bold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-            Soutenir 
+          <span className="text-primary font-black text-sm flex items-center gap-2 group-hover:translate-x-1 transition-all">
+            Offrir de la joie ❤️ 
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

@@ -3,87 +3,87 @@ import { ArrowRight, Globe, ShieldCheck, Zap } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center px-4 pt-40 pb-24 sm:px-6 lg:px-8 overflow-hidden bg-slate-900 font-sans">
-      {/* Premium Background with Image and Patterns */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="/hero-bg.png" 
-          alt="Lomé, Togo" 
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900"></div>
-        <div className="absolute inset-0 kente-pattern opacity-10"></div>
+    <section className="relative min-h-[95vh] flex items-center px-4 pt-40 pb-24 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-orange-50 via-white to-pink-50 font-sans">
+      {/* Joyful Background Elements */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute top-20 left-10 text-4xl animate-float" style={{ animationDelay: '0s' }}>❤️</div>
+        <div className="absolute top-40 right-20 text-3xl animate-float" style={{ animationDelay: '2s' }}>✨</div>
+        <div className="absolute bottom-40 left-1/4 text-4xl animate-float" style={{ animationDelay: '1s' }}>😊</div>
+        <div className="absolute top-1/2 right-1/4 text-2xl animate-float" style={{ animationDelay: '3s' }}>💖</div>
+        <div className="absolute bottom-20 right-10 text-5xl animate-float" style={{ animationDelay: '1.5s' }}>🌟</div>
+        <div className="absolute inset-0 kente-pattern opacity-5"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div className="text-left">
-          {/* Animated Premium Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 text-amber-500 mb-8 border border-amber-500/20 backdrop-blur-sm animate-slide-up">
-            <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.8)] animate-pulse"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-500">Le Crowdfunding d'Excellence au Togo</span>
+          {/* Animated Happiness Tag */}
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 text-primary mb-8 border border-primary/20 backdrop-blur-sm animate-slide-up shadow-sm">
+            <span className="text-lg animate-bounce">👋</span>
+            <span className="text-xs font-black uppercase tracking-[0.2em]">Répandons la joie au Togo</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1] animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Donnez du souffle <br />
-            à vos <span className="font-serif italic text-amber-500">ambitions</span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-8 leading-[1.1] animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            Partagez du <span className="text-primary italic font-serif">bonheur</span> <br />
+            & réalisez vos <span className="text-accent underline decoration-primary/30">rêves</span>
           </h1>
           
-          <p className="text-lg sm:text-xl text-slate-300 mb-12 max-w-xl leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            HOASSI est la plateforme de confiance pour financer vos projets au Togo. 
-            Sécurisé, local et optimisé pour un impact maximal.
+          <p className="text-lg sm:text-xl text-slate-600 mb-12 max-w-xl leading-relaxed animate-slide-up font-medium" style={{ animationDelay: '0.2s' }}>
+            HOASSI est votre espace de solidarité joyeuse. Ensemble, finançons des projets qui font sourire le Togo. ❤️
           </p>
 
           <div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
-            <Link href="/create-project" className="group w-full sm:w-auto px-8 py-4 rounded-full bg-emerald-500 text-white font-bold text-lg shadow-xl shadow-emerald-500/20 transition-all hover:bg-emerald-400 hover:-translate-y-1 flex items-center justify-center gap-2">
-              Lancer mon projet
+            <Link href="/create-project" className="group w-full sm:w-auto px-10 py-5 rounded-full bg-gradient-to-r from-primary to-primary-dark text-white font-black text-lg shadow-2xl shadow-primary/30 transition-all hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-3">
+              Lancer ma cagnotte
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
-            <a href="#projets" className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 text-white font-bold text-lg border border-white/10 backdrop-blur-md transition-all hover:bg-white/10 hover:-translate-y-1 text-center">
-              Explorer les cagnottes
+            <a href="#projets" className="w-full sm:w-auto px-10 py-5 rounded-full bg-white text-slate-700 font-black text-lg border-2 border-slate-100 shadow-xl shadow-slate-200/50 transition-all hover:bg-slate-50 hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+              Explorer ✨
             </a>
           </div>
 
-          {/* Local Trust Badges */}
-          <div className="mt-16 flex items-center gap-8 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            <div className="flex flex-col gap-1">
-              <span className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]">Modes de paiement locaux & internationaux</span>
-              <div className="flex items-center gap-8 opacity-80 filter brightness-200 mt-2">
-                <span className="text-xl font-black text-white tracking-widest">MIXX</span>
-                <span className="text-xl font-black text-white tracking-widest">MOOV</span>
-                <span className="text-xl font-black text-white tracking-widest">VISA</span>
-              </div>
+          {/* Social Proof */}
+          <div className="mt-16 flex items-center gap-4 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+            <div className="flex -space-x-4">
+              {[1,2,3,4].map(i => (
+                <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-100 overflow-hidden shadow-sm">
+                  <img src={`https://i.pravatar.cc/150?u=${i}`} alt="Avatar" className="w-full h-full object-cover" />
+                </div>
+              ))}
             </div>
+            <p className="text-sm font-bold text-slate-500">
+              <span className="text-primary font-black">+1,200</span> personnes rayonnantes nous rejoignent !
+            </p>
           </div>
         </div>
 
-        {/* Impact Visualizer / Floating Cards */}
+        {/* Happy Visualizer */}
         <div className="hidden lg:block relative h-[600px] animate-slide-up" style={{ animationDelay: '0.5s' }}>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px]"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-primary/20 rounded-full blur-[100px]"></div>
           
-          {/* Floating Premium Card 1 */}
-          <div className="absolute top-20 right-0 p-6 w-72 animate-float backdrop-blur-xl bg-white/95 rounded-[32px] border border-slate-200 shadow-2xl transform hover:scale-105 transition-transform cursor-default z-10">
-            <div className="bg-amber-100 p-3 rounded-2xl w-fit mb-4">
-              <Zap className="text-amber-500 w-6 h-6" />
+          {/* Floating Happy Card 1 */}
+          <div className="absolute top-10 right-0 p-8 w-80 animate-float backdrop-blur-xl bg-white/90 rounded-[40px] border border-white shadow-2xl shadow-primary/10 transform hover:scale-105 transition-transform cursor-default z-10">
+            <div className="bg-primary/20 p-4 rounded-2xl w-fit mb-6 animate-bounce">
+              <Zap className="text-primary w-8 h-8 fill-primary" />
             </div>
-            <h3 className="text-slate-900 font-extrabold text-xl mb-1 tracking-tight">Impact Direct</h3>
-            <p className="text-slate-600 text-sm font-medium">Financement rapide via Mixx by Yas.</p>
+            <h3 className="text-slate-900 font-black text-2xl mb-2 tracking-tight">Vibrance</h3>
+            <p className="text-slate-600 text-sm font-bold">Des dons instantanés qui changent des vies. ✨</p>
           </div>
 
-          {/* Floating Premium Card 2 */}
-          <div className="absolute bottom-20 left-0 p-6 w-72 animate-float backdrop-blur-xl bg-white/95 rounded-[32px] border border-slate-200 shadow-2xl transform hover:scale-105 transition-transform cursor-default z-10" style={{ animationDelay: '-3s' }}>
-            <div className="bg-emerald-100 p-3 rounded-2xl w-fit mb-4">
-              <ShieldCheck className="text-emerald-500 w-6 h-6" />
+          {/* Floating Happy Card 2 */}
+          <div className="absolute bottom-10 left-0 p-8 w-80 animate-float backdrop-blur-xl bg-white/90 rounded-[40px] border border-white shadow-2xl shadow-primary/10 transform hover:scale-105 transition-transform cursor-default z-10" style={{ animationDelay: '-3s' }}>
+            <div className="bg-accent/20 p-4 rounded-2xl w-fit mb-6">
+              <ShieldCheck className="text-accent w-8 h-8 fill-accent" />
             </div>
-            <h3 className="text-slate-900 font-extrabold text-xl mb-1 tracking-tight">100% Sécurisé</h3>
-            <p className="text-slate-600 text-sm font-medium">Transparence totale et vérification KYC rigoureuse.</p>
+            <h3 className="text-slate-900 font-black text-2xl mb-2 tracking-tight">Confiance</h3>
+            <p className="text-slate-600 text-sm font-bold">Sécurité totale pour votre tranquillité d'esprit. ❤️</p>
           </div>
 
-          {/* Centered Stats */}
+          {/* Centered Sun / Heart */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-             <div className="inline-block p-1 rounded-full bg-gradient-to-r from-emerald-500 to-amber-500">
-                <div className="bg-slate-900 rounded-full p-8 flex flex-col items-center">
-                  <span className="text-5xl font-black text-white mb-2 font-serif">98%</span>
-                  <span className="text-slate-400 text-xs font-bold uppercase tracking-widest text-center">Taux d'impact <br/> communautaire</span>
+             <div className="relative p-2 rounded-full bg-gradient-to-r from-primary to-accent animate-pulse">
+                <div className="bg-white rounded-full p-10 flex flex-col items-center shadow-inner">
+                  <span className="text-6xl mb-2">❤️</span>
+                  <span className="text-primary font-black text-xs uppercase tracking-widest">Togo Solidaire</span>
                 </div>
              </div>
           </div>

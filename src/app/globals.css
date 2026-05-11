@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #10B981; /* Emerald 500 */
-  --color-primary-dark: #059669; /* Emerald 600 */
-  --color-secondary: #0F172A; /* Slate 900 */
-  --color-accent: #F59E0B; /* Amber (Togo Yellow) */
-  --color-success: #10B981;
+  --color-primary: #FF5F6D; /* Vibrant Coral/Pink */
+  --color-primary-dark: #FF3B4B; 
+  --color-secondary: #2D3436; /* Soft charcoal (less harsh than slate-900) */
+  --color-accent: #FFD200; /* Sunshine Yellow */
+  --color-success: #00D2D3; /* Bright Mint/Teal */
   
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), serif;
@@ -16,8 +16,8 @@
 }
 
 :root {
-  --background: #F8FAFC; /* Light slate background */
-  --foreground: #334155; /* Slate 700 text */
+  --background: #FFFBFB; /* Warm white background */
+  --foreground: #4A4A4A; /* Softer text */
 }
 
 body {
@@ -28,18 +28,18 @@ body {
 
 /* Base Utilities */
 .text-gradient {
-  background: linear-gradient(135deg, #10B981 0%, #047857 100%);
+  background: linear-gradient(135deg, #FF5F6D 0%, #FFC371 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .bg-mesh {
-  background-color: #F8FAFC;
+  background-color: #FFFBFB;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 40%),
-    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 40%),
-    radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.05) 0px, transparent 40%);
+    radial-gradient(at 0% 0%, rgba(255, 95, 109, 0.12) 0px, transparent 40%),
+    radial-gradient(at 100% 0%, rgba(255, 210, 0, 0.1) 0px, transparent 40%),
+    radial-gradient(at 100% 100%, rgba(255, 95, 109, 0.08) 0px, transparent 40%);
 }
 
 /* Card Design (Sencollecte Style) */
