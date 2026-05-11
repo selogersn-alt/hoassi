@@ -18,17 +18,17 @@ export default function Hero() {
         <div className="text-left">
           {/* Animated Happiness Tag */}
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 text-primary mb-8 border border-primary/20 backdrop-blur-sm animate-slide-up shadow-sm">
-            <span className="text-lg animate-bounce">👋</span>
-            <span className="text-xs font-black uppercase tracking-[0.2em]">Répandons la joie au Togo</span>
+            <span className="text-lg animate-bounce">🤝</span>
+            <span className="text-xs font-black uppercase tracking-[0.2em]">L'entraide au service du Togo</span>
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-8 leading-[1.1] animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Partagez du <span className="text-primary italic font-serif">bonheur</span> <br />
-            & réalisez vos <span className="text-accent underline decoration-primary/30">rêves</span>
+            Soutenez-vous <br />
+            <span className="text-primary italic font-serif">entre vous</span>
           </h1>
           
           <p className="text-lg sm:text-xl text-slate-600 mb-12 max-w-xl leading-relaxed animate-slide-up font-medium" style={{ animationDelay: '0.2s' }}>
-            HOASSI est votre espace de solidarité joyeuse. Ensemble, finançons des projets qui font sourire le Togo. ❤️
+            HOASSI est votre espace d'action solidaire. Donnez avec le cœur et participez ensemble au développement de projets de proximité. ❤️
           </p>
 
           <div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center animate-slide-up" style={{ animationDelay: '0.3s' }}>

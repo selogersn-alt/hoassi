@@ -24,21 +24,21 @@ export const viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXTAUTH_URL || "https://hoassi.digitalh.net"),
   title: {
-    default: "HOASSI | Crowdfunding & Solidarité au Togo 🇹🇬",
+    default: "HOASSI | Solidarité & Entraide au Togo 🇹🇬",
     template: "%s | HOASSI"
   },
-  description: "La plateforme de crowdfunding n°1 au Togo. Soutenez des projets locaux, financez l'éducation et la santé via T-Money et Moov Money en toute sécurité.",
-  keywords: ["Crowdfunding Togo", "Don Togo", "T-Money", "Moov Money", "Cagnotte solidaire Togo", "Entraide Togo", "Digitalh", "Investissement Togo", "Soutien créateurs Togo", "Financement participatif Afrique"],
+  description: "La plateforme d'action solidaire au Togo. Soutenez-vous entre vous et donnez avec le cœur pour le développement de projets locaux via T-Money et Moov Money.",
+  keywords: ["Solidarité Togo", "Entraide Togo", "Action solidaire", "T-Money", "Moov Money", "Cagnotte solidaire Togo", "Digitalh", "Développement local", "Soutien créateurs Togo", "Financement participatif Afrique"],
   openGraph: {
     type: "website",
     locale: "fr_TG",
     url: "https://hoassi.digitalh.net",
-    title: "HOASSI | Excellence Crowdfunding Togo",
-    description: "Financez l'avenir du Togo. Soutenez des projets et créateurs locaux en quelques clics.",
+    title: "HOASSI | Solidarité & Entraide au Togo",
+    description: "Soutenez-vous entre vous. Donnez avec le cœur pour des actions solidaires de proximité.",
     siteName: "HOASSI",
     images: [
       {
-        url: "/logo.png", // Next.js utilisera metadataBase pour en faire une URL absolue
+        url: "/logo.png",
         width: 800,
         height: 800,
         alt: "HOASSI Logo",
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HOASSI | Crowdfunding Togo",
-    description: "Soutenez l'innovation et la solidarité au Togo.",
+    title: "HOASSI | Solidarité & Entraide",
+    description: "Donnez avec le cœur pour le développement local au Togo.",
     images: ["/logo.png"],
   },
   icons: {
