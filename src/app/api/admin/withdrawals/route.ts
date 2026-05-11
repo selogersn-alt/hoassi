@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { sendWithdrawalEmail } from "@/lib/mail";
+import { sendWithdrawalUpdateEmail } from "@/lib/mail";
 
 /**
  * =========================================================================
@@ -45,19 +45,22 @@ export async function PATCH(request: Request) {
       }
     });
 
-    // Envoyer notification au porteur (Facture Finale)
-    await sendWithdrawalEmail({
-      to: updated.userEmail,
-      amount: updated.amount,
-      status: updated.status,
-      method: updated.method,
-      grossAmount: updated.grossAmount,
-      platformFee: updated.platformFee,
-      techFee: updated.techFee
-    });
+    // Envoyer notification au porteur si le statut a changé vers COMPLETED ou REJECTED
+    if (status === "COMPLETED" || status === "REJECTED") {
+      try {
+        await sendWithdrawalUpdateEmail(
+          updated.userEmail,
+          updated.amount,
+          updated.status
+        );
+      } catch (mailError) {
+        console.error("Erreur envoi email retrait:", mailError);
+      }
+    }
 
     return NextResponse.json(updated);
   } catch (error) {
+    console.error("Withdrawal patch error:", error);
     return NextResponse.json({ error: "Erreur lors de la mise à jour" }, { status: 500 });
   }
 }

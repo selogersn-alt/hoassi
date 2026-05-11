@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { sendProjectStatusEmail } from "@/lib/mail";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -33,6 +34,20 @@ export async function PATCH(request: Request) {
         isVerified: isVerified !== undefined ? isVerified : undefined
       }
     });
+
+    // Envoyer notification par email
+    if (updated.email) {
+      try {
+        await sendProjectStatusEmail(
+          updated.email,
+          `Votre compte Créateur @${updated.username}`,
+          updated.suspended ? "REJECTED" : (updated.approved ? "APPROVED" : "PENDING")
+        );
+      } catch (mailError) {
+        console.error("Erreur envoi email créateur:", mailError);
+      }
+    }
+
     return NextResponse.json(updated);
   } catch (error) {
     return NextResponse.json({ error: "Error updating influencer" }, { status: 500 });

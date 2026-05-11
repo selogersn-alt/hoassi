@@ -97,37 +97,37 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
       <aside className="lg:w-64 flex flex-col gap-2">
         <button 
           onClick={() => setActiveTab("analytics")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "analytics" ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
+          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "analytics" ? "bg-primary text-white shadow-lg shadow-primary/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
         >
           <Monitor className="w-5 h-5" /> Analytiques
         </button>
         <button 
           onClick={() => setActiveTab("projects")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "projects" ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
+          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "projects" ? "bg-primary text-white shadow-lg shadow-primary/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
         >
           <FileText className="w-5 h-5" /> Cagnottes
         </button>
         <button 
           onClick={() => setActiveTab("influencers")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "influencers" ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
+          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "influencers" ? "bg-primary text-white shadow-lg shadow-primary/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
         >
           <Users className="w-5 h-5" /> Influenceurs
         </button>
         <button 
           onClick={() => setActiveTab("donations")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "donations" ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
+          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "donations" ? "bg-primary text-white shadow-lg shadow-primary/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
         >
           <CreditCard className="w-5 h-5" /> Transactions
         </button>
         <button 
           onClick={() => setActiveTab("ads")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "ads" ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
+          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "ads" ? "bg-primary text-white shadow-lg shadow-primary/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
         >
           <Megaphone className="w-5 h-5" /> Publicité
         </button>
         <button 
           onClick={() => setActiveTab("withdrawals")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "withdrawals" ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
+          className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all ${activeTab === "withdrawals" ? "bg-primary text-white shadow-lg shadow-primary/20" : "bg-white text-slate-600 hover:bg-slate-100"}`}
         >
           <Wallet className="w-5 h-5" /> Retraits
         </button>
@@ -149,7 +149,7 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                <div className="bg-white p-8 rounded-[30px] border border-slate-200 shadow-sm">
                  <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Total Collecté (Brut)</div>
-                 <div className="text-4xl font-black text-emerald-600 tracking-tighter">
+                 <div className="text-4xl font-black text-primary tracking-tighter">
                    {formatCurrency(
                      projects.reduce((acc: number, p: any) => acc + p.raised, 0) + 
                      influencers.reduce((acc: number, i: any) => acc + i.raised, 0)
@@ -181,7 +181,7 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                       <div key={cat} className="flex items-center gap-4">
                          <div className="w-32 text-sm font-bold text-slate-600">{cat}</div>
                          <div className="flex-grow h-3 bg-slate-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-emerald-500" style={{ width: `${Math.min(100, (total / 1000000) * 100)}%` }}></div>
+                            <div className="h-full bg-primary" style={{ width: `${Math.min(100, (total / 1000000) * 100)}%` }}></div>
                          </div>
                          <div className="text-sm font-black text-slate-900">{formatCurrency(total)}</div>
                       </div>
@@ -225,7 +225,7 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                           {p.suspended ? (
                             <span className="w-fit px-3 py-1 bg-red-100 text-red-700 rounded-full text-[10px] font-black uppercase">Suspendu</span>
                           ) : p.approved ? (
-                            <span className="w-fit px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-black uppercase">Actif</span>
+                            <span className="w-fit px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase">Actif</span>
                           ) : (
                             <span className="w-fit px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-[10px] font-black uppercase">En attente</span>
                           )}
@@ -242,9 +242,9 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                             <button onClick={() => handleAction(`/api/admin/projects/${p.id}`, "PATCH", { isVerified: true })} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title="Vérifier l'identité"><CheckCircle className="w-5 h-5" /></button>
                           )}
                           {!p.approved && (
-                            <button onClick={() => handleAction(`/api/admin/projects/${p.id}`, "PATCH", { approved: true })} className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg" title="Approuver"><CheckCircle className="w-5 h-5" /></button>
+                            <button onClick={() => handleAction(`/api/admin/projects/${p.id}`, "PATCH", { approved: true })} className="p-2 text-primary hover:bg-primary/10 rounded-lg" title="Approuver"><CheckCircle className="w-5 h-5" /></button>
                           )}
-                          <button onClick={() => handleAction(`/api/admin/projects/${p.id}`, "PATCH", { suspended: !p.suspended })} className={`p-2 ${p.suspended ? "text-emerald-600 hover:bg-emerald-50" : "text-amber-600 hover:bg-amber-50"} rounded-lg`}>
+                          <button onClick={() => handleAction(`/api/admin/projects/${p.id}`, "PATCH", { suspended: !p.suspended })} className={`p-2 ${p.suspended ? "text-primary hover:bg-primary/10" : "text-amber-600 hover:bg-amber-50"} rounded-lg`}>
                             {p.suspended ? <CheckCircle className="w-5 h-5" /> : <Ban className="w-5 h-5" />}
                           </button>
                           <button onClick={() => handleAction(`/api/admin/projects/${p.id}`, "DELETE", {})} className="p-2 text-red-600 hover:bg-red-50 rounded-lg"><XCircle className="w-5 h-5" /></button>
@@ -287,9 +287,8 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                              <a href={i.cniBack} target="_blank" className="text-[10px] font-black text-blue-500 bg-blue-50 px-2 py-1 rounded-lg hover:underline">Verso CNI</a>
                            )}
                         </div>
-                      </td>
-                      <td className="px-6 py-6">
-                         <div className="font-black text-emerald-600">{formatCurrency(i.raised)}</div>
+                                   <td className="px-6 py-6">
+                         <div className="font-black text-primary">{formatCurrency(i.raised)}</div>
                          <div className="text-[10px] text-slate-400 font-bold">{i.donorsCount} donateurs</div>
                       </td>
                       <td className="px-6 py-6 text-sm">
@@ -297,7 +296,7 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                           {i.suspended ? (
                             <span className="w-fit px-3 py-1 bg-red-100 text-red-700 rounded-full text-[10px] font-black uppercase">Suspendu</span>
                           ) : i.approved ? (
-                            <span className="w-fit px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-black uppercase">Approuvé</span>
+                            <span className="w-fit px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase">Approuvé</span>
                           ) : (
                             <span className="w-fit px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-[10px] font-black uppercase">En attente</span>
                           )}
@@ -314,9 +313,9 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                             <button onClick={() => handleAction("/api/admin/influencers", "PATCH", { id: i.id, isVerified: true })} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title="Vérifier l'identité"><CheckCircle className="w-5 h-5" /></button>
                           )}
                           {!i.approved && (
-                            <button onClick={() => handleAction("/api/admin/influencers", "PATCH", { id: i.id, approved: true })} className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg" title="Approuver"><CheckCircle className="w-5 h-5" /></button>
+                            <button onClick={() => handleAction("/api/admin/influencers", "PATCH", { id: i.id, approved: true })} className="p-2 text-primary hover:bg-primary/10 rounded-lg" title="Approuver"><CheckCircle className="w-5 h-5" /></button>
                           )}
-                          <button onClick={() => handleAction("/api/admin/influencers", "PATCH", { id: i.id, suspended: !i.suspended })} className={`p-2 ${i.suspended ? "text-emerald-600 hover:bg-emerald-50" : "text-amber-600 hover:bg-amber-50"} rounded-lg`}>
+                          <button onClick={() => handleAction("/api/admin/influencers", "PATCH", { id: i.id, suspended: !i.suspended })} className={`p-2 ${i.suspended ? "text-primary hover:bg-primary/10" : "text-amber-600 hover:bg-amber-50"} rounded-lg`}>
                             {i.suspended ? <CheckCircle className="w-5 h-5" /> : <Ban className="w-5 h-5" />}
                           </button>
                         </div>
@@ -355,7 +354,7 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                         <div className="text-xs text-slate-400">{d.transactionId}</div>
                       </td>
                       <td className="px-6 py-4">
-                         <span className={`px-2 py-1 rounded text-xs font-bold ${d.status === "COMPLETED" ? "bg-emerald-100 text-emerald-700" : d.status === "CONTESTED" ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-600"}`}>
+                         <span className={`px-2 py-1 rounded text-xs font-bold ${d.status === "COMPLETED" ? "bg-primary/10 text-primary" : d.status === "CONTESTED" ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-600"}`}>
                            {d.status}
                          </span>
                       </td>
@@ -409,10 +408,10 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                 <input name="link" placeholder="Lien de redirection (optionnel)" className="p-3 rounded-xl border" />
                 <button type="submit" className="bg-primary text-white font-bold py-3 rounded-xl">Ajouter l'emplacement pub</button>
               </form>
-
+ 
               <div className="space-y-4">
                  {ads.map((ad: any) => (
-                   <div key={ad.id} className="flex items-center justify-between p-4 border rounded-2xl">
+                    <div key={ad.id} className="flex items-center justify-between p-4 border rounded-2xl">
                       <div>
                         <span className="text-xs font-bold text-primary uppercase">{ad.location}</span>
                         <div className="text-sm font-medium truncate max-w-xs">{ad.type === "IMAGE" ? ad.link : "Script Code"}</div>
@@ -456,10 +455,10 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                             <div>-{formatCurrency(w.platformFee)}</div>
                             <div>-{formatCurrency(w.techFee)}</div>
                           </td>
-                          <td className="px-6 py-6 font-black text-emerald-600">{formatCurrency(w.amount)}</td>
+                          <td className="px-6 py-6 font-black text-primary">{formatCurrency(w.amount)}</td>
                           <td className="px-6 py-6">
                             <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${
-                              w.status === 'COMPLETED' ? 'bg-emerald-100 text-emerald-700' :
+                              w.status === 'COMPLETED' ? 'bg-primary/10 text-primary' :
                               w.status === 'REJECTED' ? 'bg-red-100 text-red-700' :
                               'bg-amber-100 text-amber-700'
                             }`}>
@@ -470,7 +469,7 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                             <div className="flex gap-2">
                               {w.status === "PENDING" && (
                                 <>
-                                  <button onClick={() => handleAction("/api/admin/withdrawals", "PATCH", { id: w.id, status: "COMPLETED" })} className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg" title="Marquer comme payé"><CheckCircle className="w-5 h-5" /></button>
+                                  <button onClick={() => handleAction("/api/admin/withdrawals", "PATCH", { id: w.id, status: "COMPLETED" })} className="p-2 text-primary hover:bg-primary/10 rounded-lg" title="Marquer comme payé"><CheckCircle className="w-5 h-5" /></button>
                                   <button onClick={() => handleAction("/api/admin/withdrawals", "PATCH", { id: w.id, status: "REJECTED" })} className="p-2 text-red-600 hover:bg-red-50 rounded-lg" title="Refuser"><XCircle className="w-5 h-5" /></button>
                                 </>
                               )}

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { sendDonationEmail } from "@/lib/mail";
+import { sendNewDonationNotification } from "@/lib/mail";
 
 /**
  * =========================================================================
@@ -62,15 +62,14 @@ export async function POST(request: Request) {
           })
         ]);
 
-        // Email de notification
+        // Email de notification au porteur de projet
         if (donation.project.email) {
-          sendDonationEmail({
-            to: donation.project.email,
-            projectTitle: donation.project.title,
-            donorName: donation.publicName || "Donateur anonyme",
-            amount: donation.amount,
-            message: donation.message || ""
-          }).catch(e => console.error("SMTP error:", e));
+          sendNewDonationNotification(
+            donation.project.email,
+            donation.publicName || "Un donateur",
+            donation.amount,
+            donation.project.title
+          ).catch(e => console.error("SMTP error (Project Owner):", e));
         }
 
         console.log(`[Success PayGate] Don de ${donation.amount} validé pour ${donation.projectId}`);
@@ -97,13 +96,12 @@ export async function POST(request: Request) {
           ]);
 
            if (influencerDonation.influencer.email) {
-            sendDonationEmail({
-              to: influencerDonation.influencer.email,
-              projectTitle: `Soutien @${influencerDonation.influencer.username}`,
-              donorName: influencerDonation.publicName || "Un follower",
-              amount: influencerDonation.amount,
-              message: influencerDonation.message || ""
-            }).catch(e => console.error("SMTP error:", e));
+            sendNewDonationNotification(
+              influencerDonation.influencer.email,
+              influencerDonation.publicName || "Un follower",
+              influencerDonation.amount,
+              `Soutien @${influencerDonation.influencer.username}`
+            ).catch(e => console.error("SMTP error (Influencer):", e));
           }
           console.log(`[Success PayGate] Soutien Influenceur validé (+${influencerDonation.amount})`);
         }

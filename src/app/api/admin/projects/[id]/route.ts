@@ -25,11 +25,15 @@ export async function PATCH(
 
     // Notification de statut
     if (updatedProject.email) {
-      await sendProjectStatusEmail({
-        to: updatedProject.email,
-        projectTitle: updatedProject.title,
-        status: updatedProject.suspended ? "REJECTED" : (updatedProject.approved ? "APPROVED" : "PENDING")
-      });
+      try {
+        await sendProjectStatusEmail(
+          updatedProject.email,
+          updatedProject.title,
+          updatedProject.suspended ? "REJECTED" : (updatedProject.approved ? "APPROVED" : "PENDING")
+        );
+      } catch (mailError) {
+        console.error("Erreur envoi email statut projet:", mailError);
+      }
     }
 
     return NextResponse.json(updatedProject);

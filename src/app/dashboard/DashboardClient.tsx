@@ -55,13 +55,13 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
       <div className="flex border-b border-slate-100 p-2 sm:p-4 bg-slate-50/50">
         <button 
           onClick={() => setActiveTab("my-projects")}
-          className={`px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === "my-projects" ? "bg-slate-900 text-white shadow-xl" : "text-slate-500 hover:text-slate-900"}`}
+          className={`px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === "my-projects" ? "bg-primary text-white shadow-xl shadow-primary/20" : "text-slate-500 hover:text-slate-900"}`}
         >
           Mes cagnottes
         </button>
         <button 
           onClick={() => setActiveTab("payouts")}
-          className={`px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === "payouts" ? "bg-slate-900 text-white shadow-xl" : "text-slate-500 hover:text-slate-900"}`}
+          className={`px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === "payouts" ? "bg-primary text-white shadow-xl shadow-primary/20" : "text-slate-500 hover:text-slate-900"}`}
         >
           Retraits
         </button>
@@ -73,12 +73,12 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
             {projects.length === 0 ? (
               <div className="text-center py-20 px-4 bg-slate-50 rounded-[32px] border border-dashed border-slate-300">
                 <h3 className="text-xl font-bold text-slate-800 mb-4 tracking-tight">Vous n'avez pas encore de cagnotte active</h3>
-                <Link href="/create-project" className="inline-block px-8 py-4 bg-emerald-500 text-white rounded-full font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-500/20 hover:-translate-y-1 transition-transform">Lancer ma première cagnotte</Link>
+                <Link href="/create-project" className="inline-block px-8 py-4 bg-primary text-white rounded-full font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/20 hover:-translate-y-1 transition-transform">Lancer ma première cagnotte</Link>
               </div>
             ) : (
               <div className="grid gap-6">
                 {projects.map((project: any) => (
-                  <div key={project.id} className="group p-6 sm:p-8 bg-slate-50 rounded-[32px] border border-slate-200 hover:border-emerald-500/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden">
+                  <div key={project.id} className="group p-6 sm:p-8 bg-slate-50 rounded-[32px] border border-slate-200 hover:border-primary/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 overflow-hidden">
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
                       <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-md flex-shrink-0 group-hover:scale-105 transition-transform">
                         <img src={project.image} alt="" className="w-full h-full object-cover" />
@@ -87,13 +87,13 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                         <div className="flex items-center gap-3 mb-1">
                           <h3 className="text-lg font-black text-slate-900 tracking-tight">{project.title}</h3>
                           {project.approved ? (
-                            <span className="flex items-center gap-1 text-[10px] font-black text-emerald-600 uppercase tracking-widest"><CheckCircle className="w-3 h-3" /> Actif</span>
+                            <span className="flex items-center gap-1 text-[10px] font-black text-primary uppercase tracking-widest"><CheckCircle className="w-3 h-3" /> Actif</span>
                           ) : (
                             <span className="flex items-center gap-1 text-[10px] font-black text-amber-600 uppercase tracking-widest"><Clock className="w-3 h-3" /> Modération</span>
                           )}
                         </div>
                         <div className="flex items-center gap-4 text-xs font-bold text-slate-500">
-                           <span className="text-emerald-500">{formatCurrency(project.raised)}</span>
+                           <span className="text-primary">{formatCurrency(project.raised)}</span>
                            <span className="text-slate-200">/</span>
                            <span>Objectif: {formatCurrency(project.goal)}</span>
                         </div>
@@ -116,14 +116,14 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
            <div className="max-w-4xl mx-auto py-8">
               {!showForm ? (
                 <div className="text-center">
-                  <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-[24px] flex items-center justify-center mx-auto mb-6">
+                  <div className="w-20 h-20 bg-primary/10 text-primary rounded-[24px] flex items-center justify-center mx-auto mb-6">
                     <CreditCard className="w-10 h-10" />
                   </div>
                   <h3 className="text-2xl font-black text-slate-900 tracking-tight mb-2">Centre de Retraits</h3>
                   <p className="text-slate-500 font-medium mb-10 leading-relaxed">Les fonds sont disponibles pour un retrait dès que votre cagnotte a reçu des dons.</p>
                   
                   <div className="p-8 bg-slate-900 rounded-[32px] text-left border border-white/5 shadow-2xl relative overflow-hidden mb-12">
-                    <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full -mr-24 -mt-24 blur-3xl"></div>
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full -mr-24 -mt-24 blur-3xl"></div>
                     <div className="relative z-10">
                       <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">Solde Net Global (Estimé)</p>
                       <h4 className="text-4xl font-black text-white mb-8 tracking-tighter">
@@ -131,7 +131,7 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                       </h4>
                       <button 
                         onClick={() => setShowForm(true)}
-                        className="w-full py-5 bg-emerald-500 text-white font-black rounded-2xl shadow-xl shadow-emerald-500/20 hover:-translate-y-1 transition-transform uppercase tracking-widest text-[11px]"
+                        className="w-full py-5 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 hover:-translate-y-1 transition-transform uppercase tracking-widest text-[11px]"
                       >
                         Initier une demande de retrait
                       </button>
@@ -151,7 +151,7 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                               <div className="text-[10px] text-slate-400 font-bold uppercase">{w.method} - {w.destination}</div>
                             </div>
                             <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase ${
-                              w.status === 'COMPLETED' ? 'bg-emerald-100 text-emerald-700' :
+                              w.status === 'COMPLETED' ? 'bg-primary/10 text-primary' :
                               w.status === 'REJECTED' ? 'bg-red-100 text-red-700' :
                               'bg-amber-100 text-amber-700'
                             }`}>
@@ -175,7 +175,7 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                         <div>
                           <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Cagnotte concernée</label>
                           <select 
-                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-primary"
                             value={formData.referenceId}
                             onChange={(e) => setFormData({...formData, referenceId: e.target.value})}
                           >
@@ -190,7 +190,7 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                             required
                             type="number" 
                             placeholder="Ex: 10000"
-                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-primary"
                             value={formData.amount}
                             onChange={(e) => setFormData({...formData, amount: e.target.value})}
                           />
@@ -201,7 +201,7 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                         <div>
                           <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Méthode de retrait</label>
                           <select 
-                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-primary"
                             value={formData.method}
                             onChange={(e) => setFormData({...formData, method: e.target.value})}
                           >
@@ -216,14 +216,14 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                             required
                             type="text" 
                             placeholder="+228..."
-                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                            className="w-full p-4 rounded-2xl border border-slate-200 bg-white font-bold text-sm outline-none focus:ring-2 focus:ring-primary"
                             value={formData.destination}
                             onChange={(e) => setFormData({...formData, destination: e.target.value})}
                           />
                         </div>
                       </div>
 
-                      <div className="p-6 bg-slate-100 border border-slate-200 rounded-3xl space-y-2">
+                      <div className="p-6 bg-white border border-orange-100 rounded-3xl space-y-2 shadow-sm">
                         <div className="flex justify-between text-xs font-bold text-slate-500">
                           <span>Montant Brut :</span>
                           <span>{formatCurrency(Number(formData.amount) || 0)}</span>
@@ -236,7 +236,7 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                           <span>Frais Techniques (2%) :</span>
                           <span>-{formatCurrency((Number(formData.amount) || 0) * 0.02)}</span>
                         </div>
-                        <div className="pt-2 border-t border-slate-200 flex justify-between text-sm font-black text-emerald-600">
+                        <div className="pt-2 border-t border-slate-100 flex justify-between text-sm font-black text-primary">
                           <span>Net à recevoir :</span>
                           <span>{formatCurrency((Number(formData.amount) || 0) * 0.93)}</span>
                         </div>
@@ -245,7 +245,7 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
                       <button 
                         disabled={loading}
                         type="submit" 
-                        className="w-full py-5 bg-slate-900 text-white font-black rounded-2xl shadow-2xl hover:bg-black transition-all uppercase tracking-widest text-[11px] disabled:opacity-50"
+                        className="w-full py-5 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 hover:opacity-90 transition-all uppercase tracking-widest text-[11px] disabled:opacity-50"
                       >
                         {loading ? "Traitement..." : "Confirmer la demande"}
                       </button>
@@ -256,22 +256,22 @@ export default function DashboardClient({ user, projects, withdrawals }: { user:
         )}
 
         {/* Referral System */}
-        <div className="mt-12 bg-emerald-900 rounded-[40px] p-8 sm:p-12 text-white overflow-hidden relative">
+        <div className="mt-12 bg-primary rounded-[40px] p-8 sm:p-12 text-white overflow-hidden relative shadow-2xl shadow-primary/20">
           <div className="relative z-10">
-            <h3 className="text-2xl font-black mb-4">Invitez vos amis</h3>
-            <p className="text-emerald-200 text-sm font-medium mb-8 max-w-md">
-              Partagez HOASSI avec vos proches. Pour chaque nouveau créateur parrainé, vous renforcez la solidarité au Togo.
+            <h3 className="text-2xl font-black mb-4">✨ Invitez vos amis</h3>
+            <p className="text-white/80 text-sm font-medium mb-8 max-w-md">
+              Partagez HOASSI avec vos proches. Pour chaque nouveau créateur parrainé, vous renforcez la solidarité au Togo. ❤️
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-grow bg-white/10 backdrop-blur-md rounded-2xl p-4 font-mono text-sm border border-white/20 select-all">
+              <div className="flex-grow bg-white/20 backdrop-blur-md rounded-2xl p-4 font-mono text-sm border border-white/20 select-all">
                 {typeof window !== 'undefined' ? `${window.location.origin}/signup?ref=${session?.user?.referralCode}` : 'Lien de parrainage'}
               </div>
-              <button className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-white font-black rounded-2xl transition-all shadow-xl">
+              <button className="px-8 py-4 bg-white text-primary font-black rounded-2xl transition-all shadow-xl hover:-translate-y-1">
                 Copier le lien
               </button>
             </div>
           </div>
-          <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         </div>
       </div>
     </div>

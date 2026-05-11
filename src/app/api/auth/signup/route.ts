@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { sendWelcomeEmail } from "@/lib/mail";
 
 export async function POST(request: Request) {
   try {
@@ -54,6 +55,14 @@ export async function POST(request: Request) {
           image: "/avatar.png"
         }
       });
+    }
+
+    // Envoyer l'email de bienvenue
+    try {
+      await sendWelcomeEmail(user.email, user.name || "Ami HOASSI");
+    } catch (mailError) {
+      console.error("Erreur envoi email bienvenue:", mailError);
+      // On ne bloque pas la création de compte si l'email échoue
     }
 
     return NextResponse.json({ message: "Utilisateur créé avec succès" }, { status: 201 });

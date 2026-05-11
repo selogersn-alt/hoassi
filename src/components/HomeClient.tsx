@@ -35,9 +35,9 @@ export default function HomeClient({ initialProjects }: { initialProjects: Proje
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
         <div className="max-w-2xl">
           <div className="flex items-center gap-3 mb-4">
-            <div className="h-8 w-1.5 bg-emerald-500 rounded-full"></div>
+            <div className="h-8 w-1.5 bg-primary rounded-full"></div>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-              Projets <span className="text-emerald-500">à la Une</span>
+              Projets <span className="text-primary">à la Une</span>
             </h2>
           </div>
           <p className="text-slate-500 text-lg font-medium leading-relaxed">
@@ -58,7 +58,7 @@ export default function HomeClient({ initialProjects }: { initialProjects: Proje
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-black transition-all border ${selectedCategory === cat.id ? "bg-emerald-500 text-white border-emerald-500 shadow-xl shadow-emerald-500/20" : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"}`}
+              className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-black transition-all border ${selectedCategory === cat.id ? "bg-primary text-white border-primary shadow-xl shadow-primary/20" : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"}`}
             >
               {cat.icon}
               {cat.name}
@@ -75,7 +75,7 @@ export default function HomeClient({ initialProjects }: { initialProjects: Proje
           <p className="text-2xl text-slate-400 font-black mb-4">Aucun projet dans cette catégorie.</p>
           <button 
             onClick={() => setSelectedCategory(null)}
-            className="text-emerald-500 font-black uppercase tracking-widest text-xs hover:text-emerald-600 transition-colors"
+            className="text-primary font-black uppercase tracking-widest text-xs hover:opacity-80 transition-opacity"
           >
             Voir tous les projets
           </button>

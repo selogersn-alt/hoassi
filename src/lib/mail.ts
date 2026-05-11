@@ -2,174 +2,141 @@ import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: process.env.SMTP_PORT === "465",
+  port: parseInt(process.env.SMTP_PORT || "465"),
+  secure: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
   },
 });
 
-export async function sendDonationEmail({
-  to,
-  donorName,
-  amount,
-  message,
-  projectTitle,
-}: {
-  to: string;
-  donorName: string;
-  amount: number;
-  message?: string;
-  projectTitle: string;
-}) {
-  const mailOptions = {
+const APP_NAME = "HOASSI";
+const PRIMARY_COLOR = "#ff5a5f"; // Coral
+const FOOTER_TEXT = "HOASSI - L'excellence Crowdfunding au Togo. Propulsé par Digitalh.";
+
+/**
+ * Base template for joyful emails
+ */
+const getHtmlTemplate = (title: string, content: string, ctaText?: string, ctaUrl?: string) => `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title}</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fff9f9; margin: 0; padding: 0; color: #334155; }
+    .container { max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 40px; overflow: hidden; box-shadow: 0 10px 40px rgba(255, 90, 95, 0.1); border: 1px solid #ffe4e4; }
+    .header { background: linear-gradient(135deg, ${PRIMARY_COLOR} 0%, #ff8a8e 100%); padding: 40px 20px; text-align: center; color: white; }
+    .header h1 { margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; }
+    .content { padding: 40px 30px; line-height: 1.6; font-size: 16px; }
+    .content h2 { color: #0f172a; font-weight: 800; margin-top: 0; }
+    .footer { padding: 30px; text-align: center; font-size: 12px; color: #94a3b8; background-color: #f8fafc; }
+    .button { display: inline-block; padding: 16px 32px; background-color: ${PRIMARY_COLOR}; color: #ffffff !important; text-decoration: none; border-radius: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; margin-top: 20px; box-shadow: 0 10px 20px rgba(255, 90, 95, 0.2); }
+    .emoji { font-size: 24px; vertical-align: middle; }
+    .highlight { color: ${PRIMARY_COLOR}; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>${APP_NAME} ❤️</h1>
+    </div>
+    <div class="content">
+      <h2>${title}</h2>
+      ${content}
+      ${ctaText && ctaUrl ? `<div style="text-align: center; margin-top: 30px;"><a href="${ctaUrl}" class="button">${ctaText}</a></div>` : ''}
+    </div>
+    <div class="footer">
+      <p>${FOOTER_TEXT}</p>
+      <p>© ${new Date().getFullYear()} Digitalh. Tous droits réservés.</p>
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+export async function sendWelcomeEmail(to: string, name: string) {
+  const title = "Bienvenue dans l'aventure HOASSI ! ✨";
+  const content = `
+    <p>Bonjour <span class="highlight">${name}</span>,</p>
+    <p>Nous sommes ravis de vous compter parmi nous ! HOASSI est bien plus qu'une plateforme de crowdfunding, c'est une communauté de solidarité qui fait bouger le Togo. 🇹🇬</p>
+    <p>Vous pouvez dès maintenant :</p>
+    <ul>
+      <li>Lancer votre propre cagnotte solidaire.</li>
+      <li>Soutenir des projets inspirants.</li>
+      <li>Partager votre lien de parrainage pour agrandir la communauté.</li>
+    </ul>
+    <p>Ensemble, créons de la joie et de l'impact ! ❤️</p>
+  `;
+  
+  return transporter.sendMail({
     from: process.env.SMTP_FROM,
     to,
-    subject: `Nouveau don reçu ! ✨ - ${projectTitle}`,
-    html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 20px;">
-        <h1 style="color: #D4AF37; text-align: center;">HOASSI</h1>
-        <h2 style="color: #020617; text-align: center;">Bonne nouvelle !</h2>
-        <p style="color: #475569; font-size: 16px; line-height: 1.5;">
-          Bonjour,<br><br>
-          Votre projet <strong>"${projectTitle}"</strong> vient de recevoir un nouveau soutien de la part de <strong>${donorName}</strong>.
-        </p>
-        <div style="background-color: #f8fafc; padding: 20px; border-radius: 12px; text-align: center; margin: 20px 0;">
-          <p style="margin: 0; color: #64748b; font-size: 14px; text-transform: uppercase; font-weight: bold;">Montant du don</p>
-          <p style="margin: 5px 0 0 0; color: #020617; font-size: 32px; font-weight: 900;">${amount} FCFA</p>
-        </div>
-        ${message ? `
-          <div style="border-left: 4px solid #D4AF37; padding: 10px 20px; background-color: #fffaf0; margin: 20px 0;">
-            <p style="margin: 0; color: #92400e; font-style: italic;">"${message}"</p>
-          </div>
-        ` : ""}
-        <p style="color: #94a3b8; font-size: 12px; text-align: center; margin-top: 40px;">
-          Ceci est une notification automatique de la plateforme HOASSI propulsée par Digitalh.
-        </p>
-      </div>
-    `,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Email envoyé à ${to}`);
-  } catch (error) {
-    console.error("Erreur SMTP:", error);
-  }
+    subject: `Bienvenue chez ${APP_NAME} !`,
+    html: getHtmlTemplate(title, content, "Accéder à mon tableau de bord", `${process.env.NEXTAUTH_URL}/dashboard`),
+  });
 }
-export async function sendWithdrawalEmail({
-  to,
-  amount,
-  status,
-  method,
-  grossAmount,
-  platformFee,
-  techFee,
-}: {
-  to: string;
-  amount: number;
-  status: string;
-  method: string;
-  grossAmount?: number;
-  platformFee?: number;
-  techFee?: number;
-}) {
+
+export async function sendDonationSuccessEmail(to: string, amount: number, projectTitle: string) {
+  const title = "Merci pour votre générosité ! ❤️";
+  const content = `
+    <p>Votre don de <span class="highlight">${new Intl.NumberFormat('fr-FR').format(amount)} XOF</span> pour le projet <strong>"${projectTitle}"</strong> a bien été reçu.</p>
+    <p>Grâce à votre soutien, nous faisons un pas de plus vers la réussite de cette initiative. Chaque geste compte énormément.</p>
+    <p>N'hésitez pas à partager ce projet autour de vous pour décupler son impact ! ✨</p>
+  `;
+
+  return transporter.sendMail({
+    from: process.env.SMTP_FROM,
+    to,
+    subject: `Merci pour votre don ! - ${APP_NAME}`,
+    html: getHtmlTemplate(title, content, "Voir l'avancement du projet", `${process.env.NEXTAUTH_URL}/`),
+  });
+}
+
+export async function sendNewDonationNotification(to: string, donorName: string, amount: number, projectTitle: string) {
+  const title = "Nouvelle contribution reçue ! 🌟";
+  const content = `
+    <p>Excellente nouvelle ! <span class="highlight">${donorName}</span> vient de contribuer à hauteur de <span class="highlight">${new Intl.NumberFormat('fr-FR').format(amount)} XOF</span> à votre projet <strong>"${projectTitle}"</strong>.</p>
+    <p>Votre cagnotte continue de grimper ! C'est le moment idéal pour remercier vos soutiens et continuer à partager votre aventure.</p>
+  `;
+
+  return transporter.sendMail({
+    from: process.env.SMTP_FROM,
+    to,
+    subject: `Nouveau don reçu ! 🎉 - ${APP_NAME}`,
+    html: getHtmlTemplate(title, content, "Gérer mon projet", `${process.env.NEXTAUTH_URL}/dashboard`),
+  });
+}
+
+export async function sendWithdrawalUpdateEmail(to: string, amount: number, status: string) {
   const isCompleted = status === "COMPLETED";
-  const mailOptions = {
+  const title = isCompleted ? "Votre retrait a été effectué ! 💸" : "Mise à jour de votre demande de retrait";
+  
+  const content = isCompleted 
+    ? `<p>Bonne nouvelle ! Votre demande de retrait de <span class="highlight">${new Intl.NumberFormat('fr-FR').format(amount)} XOF</span> a été traitée avec succès. Les fonds ont été envoyés vers votre compte de destination.</p>`
+    : `<p>Votre demande de retrait de <span class="highlight">${new Intl.NumberFormat('fr-FR').format(amount)} XOF</span> a été refusée. Veuillez contacter le support pour plus d'informations ou vérifier vos informations de paiement.</p>`;
+
+  return transporter.sendMail({
     from: process.env.SMTP_FROM,
     to,
-    subject: isCompleted ? "Facture de Retrait HOASSI - Payé 🧾" : "Reçu de Retrait HOASSI - En attente",
-    html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px;">
-        <h1 style="color: #059669; text-align: center; margin-bottom: 0;">HOASSI</h1>
-        <p style="text-align: center; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Excellence Crowdfunding Togo</p>
-        
-        <h2 style="color: #020617; text-align: center; margin-top: 30px;">${isCompleted ? "Facture de Paiement" : "Reçu de Demande"}</h2>
-        
-        <div style="background-color: #f8fafc; padding: 24px; border-radius: 16px; margin: 24px 0;">
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-              <td style="padding: 12px 0; color: #64748b; font-size: 14px;">Montant Collecté (Brut)</td>
-              <td style="padding: 12px 0; text-align: right; color: #020617; font-weight: bold;">${grossAmount || amount} FCFA</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-              <td style="padding: 12px 0; color: #64748b; font-size: 14px;">Commission HOASSI (5%)</td>
-              <td style="padding: 12px 0; text-align: right; color: #ef4444;">-${platformFee || 0} FCFA</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-              <td style="padding: 12px 0; color: #64748b; font-size: 14px;">Frais Techniques (2%)</td>
-              <td style="padding: 12px 0; text-align: right; color: #ef4444;">-${techFee || 0} FCFA</td>
-            </tr>
-            <tr>
-              <td style="padding: 20px 0 0 0; color: #020617; font-size: 18px; font-weight: 900;">NET À RECEVOIR</td>
-              <td style="padding: 20px 0 0 0; text-align: right; color: #059669; font-size: 24px; font-weight: 900;">${amount} FCFA</td>
-            </tr>
-          </table>
-        </div>
-
-        <div style="text-align: center; margin-top: 24px;">
-           <p style="color: #475569; font-size: 14px;"><strong>Méthode :</strong> ${method}</p>
-           <span style="display: inline-block; padding: 6px 16px; border-radius: 99px; font-size: 12px; font-weight: bold; ${isCompleted ? 'background-color: #ecfdf5; color: #059669;' : 'background-color: #fffbeb; color: #b45309;'}">
-             ${status === "COMPLETED" ? "PAIEMENT EFFECTUÉ" : "TRAITEMENT EN COURS"}
-           </span>
-        </div>
-
-        <p style="color: #94a3b8; font-size: 11px; text-align: center; margin-top: 40px; line-height: 1.6;">
-          Merci pour votre confiance.<br>
-          HOASSI est une plateforme propulsée par Digitalh Togo.
-        </p>
-      </div>
-    `,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-  } catch (error) {
-    console.error("Erreur SMTP Retrait:", error);
-  }
+    subject: isCompleted ? `Paiement effectué ! ✅ - ${APP_NAME}` : `Mise à jour retrait - ${APP_NAME}`,
+    html: getHtmlTemplate(title, content, "Consulter mon historique", `${process.env.NEXTAUTH_URL}/dashboard`),
+  });
 }
 
-export async function sendProjectStatusEmail({
-  to,
-  projectTitle,
-  status,
-}: {
-  to: string;
-  projectTitle: string;
-  status: "PENDING" | "APPROVED" | "REJECTED";
-}) {
-  const mailOptions = {
+export async function sendProjectStatusEmail(to: string, projectTitle: string, status: string) {
+  const isApproved = status === "APPROVED";
+  const title = isApproved ? "Votre projet est en ligne ! 🚀" : "Mise à jour de votre projet";
+  
+  const content = isApproved 
+    ? `<p>Félicitations ! Votre projet <strong>"${projectTitle}"</strong> a été validé par notre équipe. Il est désormais visible par toute la communauté et prêt à recevoir des dons.</p><p>C'est le moment de partager votre lien au maximum ! ❤️</p>`
+    : `<p>Votre projet <strong>"${projectTitle}"</strong> a été suspendu ou nécessite des modifications. Notre équipe de modération vous contactera prochainement si nécessaire, ou vous pouvez nous écrire directement.</p>`;
+
+  return transporter.sendMail({
     from: process.env.SMTP_FROM,
     to,
-    subject: status === "PENDING" ? "Cagnotte en cours de révision ⏳" : "Mise à jour de votre cagnotte ✨",
-    html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 20px;">
-        <h1 style="color: #D4AF37; text-align: center;">HOASSI</h1>
-        <h2 style="color: #020617; text-align: center;">Statut de votre projet</h2>
-        <p style="color: #475569; font-size: 16px; line-height: 1.5;">
-          Bonjour,<br><br>
-          Votre projet <strong>"${projectTitle}"</strong> a été ${
-            status === "PENDING" ? "soumis avec succès et est en attente de modération par notre équipe." :
-            status === "APPROVED" ? "approuvé ! Il est désormais public et peut recevoir des dons." :
-            "refusé ou suspendu. Veuillez nous contacter pour plus d'informations."
-          }
-        </p>
-        ${status === "APPROVED" ? `
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="https://hoassi.tg/dashboard" style="background-color: #D4AF37; color: white; padding: 15px 30px; text-decoration: none; border-radius: 12px; font-weight: bold;">Accéder à mon tableau de bord</a>
-          </div>
-        ` : ""}
-        <p style="color: #94a3b8; font-size: 12px; text-align: center; margin-top: 40px;">
-          L'équipe HOASSI
-        </p>
-      </div>
-    `,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-  } catch (error) {
-    console.error("Erreur SMTP Projet:", error);
-  }
+    subject: isApproved ? `Projet Validé ! 🎉 - ${APP_NAME}` : `Statut de votre projet - ${APP_NAME}`,
+    html: getHtmlTemplate(title, content, "Voir mon projet", `${process.env.NEXTAUTH_URL}/dashboard`),
+  });
 }

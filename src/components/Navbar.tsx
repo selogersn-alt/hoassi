@@ -33,7 +33,7 @@ export default function Navbar() {
               <span className={`text-2xl font-black tracking-tight transition-colors ${
                 isScrolled ? "text-primary" : "text-slate-900"
               }`}>
-                HOASSI
+                HOASSI ❤️
               </span>
             </Link>
           </div>

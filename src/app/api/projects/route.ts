@@ -54,11 +54,15 @@ export async function POST(request: Request) {
     
     // Notification Email
     if (newProject.email) {
-      await sendProjectStatusEmail({
-        to: newProject.email,
-        projectTitle: newProject.title,
-        status: "PENDING"
-      });
+      try {
+        await sendProjectStatusEmail(
+          newProject.email,
+          newProject.title,
+          "PENDING"
+        );
+      } catch (mailError) {
+        console.error("Erreur envoi email création projet:", mailError);
+      }
     }
 
     return NextResponse.json(newProject, { status: 201 });

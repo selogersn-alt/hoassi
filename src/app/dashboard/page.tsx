@@ -70,17 +70,17 @@ export default async function DashboardPage() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Collecté (Brut)</p>
             <h3 className="text-3xl font-black text-slate-900">{new Intl.NumberFormat('fr-FR').format(totalRaised)} XOF</h3>
           </div>
-          <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Net à Percevoir (Estimé)</p>
-            <h3 className="text-3xl font-black text-emerald-600">{new Intl.NumberFormat('fr-FR').format(totalRaised * 0.95)} XOF</h3>
+          <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden group border-primary/10 bg-gradient-to-br from-white to-orange-50/20">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+            <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-2">Net à Percevoir (Estimé)</p>
+            <h3 className="text-3xl font-black text-primary">{new Intl.NumberFormat('fr-FR').format(totalRaised * 0.95)} XOF</h3>
           </div>
           <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Nombre de Soutiens</p>
             <h3 className="text-3xl font-black text-slate-900">{totalDonors}</h3>
           </div>
