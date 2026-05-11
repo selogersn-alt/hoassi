@@ -22,32 +22,25 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXTAUTH_URL || "https://hoassi.digitalh.net"),
   title: {
     default: "HOASSI | Excellence Crowdfunding Togo - Soutien & Solidarité",
     template: "%s | HOASSI Togo"
   },
-  description: "La plateforme de crowdfunding référence au Togo. Soutenez l'éducation, la santé et l'entrepreneuriat local via T-Money et Moov Money. Propulsé par Digitalh.",
+  description: "La plateforme de crowdfunding référence au Togo. Soutenez l'éducation, la santé et l'entrepreneuriat local via T-Money et Moov Money.",
   keywords: ["Crowdfunding Togo", "Don Togo", "T-Money", "Moov Money", "Cagnotte solidaire Togo", "Entraide Togo", "Digitalh", "Investissement Togo", "Soutien créateurs Togo", "Financement participatif Afrique"],
-  authors: [{ name: "Digitalh", url: "https://digitalh.tg" }],
-  creator: "Digitalh",
-  publisher: "HOASSI",
-  robots: {
-    index: true,
-    follow: true,
-  },
   openGraph: {
     type: "website",
     locale: "fr_TG",
-    url: "https://hoassi.tg",
+    url: "https://hoassi.digitalh.net",
     title: "HOASSI | Excellence Crowdfunding Togo",
-    description: "Financez l'avenir du Togo en toute sécurité. Santé, Éducation, Entrepreneuriat.",
+    description: "Financez l'avenir du Togo en toute sécurité. Soutenez vos créateurs préférés.",
     siteName: "HOASSI",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "/logo.png",
+        width: 800,
+        height: 800,
         alt: "HOASSI Crowdfunding Togo",
       },
     ],
@@ -55,8 +48,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HOASSI | Excellence Crowdfunding Togo",
-    description: "Financez l'avenir du Togo en toute sécurité.",
-    images: ["/og-image.jpg"],
+    description: "La plateforme de crowdfunding référence au Togo.",
+    images: ["/logo.png"],
   },
   icons: {
     icon: "/logo.png",

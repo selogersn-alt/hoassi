@@ -287,9 +287,10 @@ export default function AdminDashboardClient({ initialData }: { initialData: any
                              <a href={i.cniBack} target="_blank" className="text-[10px] font-black text-blue-500 bg-blue-50 px-2 py-1 rounded-lg hover:underline">Verso CNI</a>
                            )}
                         </div>
-                                   <td className="px-6 py-6">
-                         <div className="font-black text-primary">{formatCurrency(i.raised)}</div>
-                         <div className="text-[10px] text-slate-400 font-bold">{i.donorsCount} donateurs</div>
+                      </td>
+                      <td className="px-6 py-6">
+                        <div className="font-black text-primary">{formatCurrency(i.raised)}</div>
+                        <div className="text-[10px] text-slate-400 font-bold">{i.donorsCount} donateurs</div>
                       </td>
                       <td className="px-6 py-6 text-sm">
                         <div className="flex flex-col gap-1">

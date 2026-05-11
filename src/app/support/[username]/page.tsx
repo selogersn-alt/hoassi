@@ -3,7 +3,33 @@ import Navbar from "@/components/Navbar";
 import { notFound } from "next/navigation";
 import InfluencerDonationForm from "./InfluencerDonationForm";
 
+import { Metadata } from "next";
+
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ username: string }> }): Promise<Metadata> {
+  const { username } = await params;
+  const influencer = await prisma.influencer.findUnique({ where: { username } });
+  
+  if (!influencer) return { title: "Influenceur non trouvé" };
+
+  return {
+    title: `Soutenir ${influencer.fullname} | HOASSI Togo`,
+    description: influencer.bio.substring(0, 160),
+    openGraph: {
+      title: `Soutenir ${influencer.fullname} sur HOASSI`,
+      description: influencer.bio.substring(0, 160),
+      images: [influencer.image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Soutenir ${influencer.fullname}`,
+      description: influencer.bio.substring(0, 160),
+      images: [influencer.image],
+    }
+  };
+}
+
 
 export default async function InfluencerSupportPage({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;

@@ -140,3 +140,52 @@ export async function sendProjectStatusEmail(to: string, projectTitle: string, s
     html: getHtmlTemplate(title, content, "Voir mon projet", `${process.env.NEXTAUTH_URL}/dashboard`),
   });
 }
+
+export async function sendDonationEmail(params: { to: string; projectTitle: string; donorName: string; amount: number; message?: string }) {
+  const title = "Nouvelle contribution reçue ! 🌟";
+  const content = `
+    <p>Excellente nouvelle ! <span class="highlight">${params.donorName}</span> vient de contribuer à hauteur de <span class="highlight">${new Intl.NumberFormat('fr-FR').format(params.amount)} XOF</span> à votre projet <strong>"${params.projectTitle}"</strong>.</p>
+    ${params.message ? `<p>Message du donateur : <em>"${params.message}"</em></p>` : ''}
+    <p>Votre cagnotte continue de grimper ! ❤️</p>
+  `;
+
+  return transporter.sendMail({
+    from: process.env.SMTP_FROM,
+    to: params.to,
+    subject: `Nouveau don reçu ! 🎉 - ${APP_NAME}`,
+    html: getHtmlTemplate(title, content, "Gérer mon projet", `${process.env.NEXTAUTH_URL}/dashboard`),
+  });
+}
+
+export async function sendWithdrawalEmail(params: { 
+  to: string; 
+  amount: number; 
+  status: string; 
+  method: string; 
+  grossAmount: number; 
+  platformFee: number; 
+  techFee: number; 
+}) {
+  const title = "Demande de retrait enregistrée 💸";
+  const content = `
+    <p>Votre demande de retrait de <span class="highlight">${new Intl.NumberFormat('fr-FR').format(params.amount)} XOF</span> a bien été prise en compte.</p>
+    <div style="background: #f8fafc; padding: 20px; border-radius: 15px; margin: 20px 0;">
+      <p style="margin: 5px 0;"><strong>Détails du retrait :</strong></p>
+      <ul style="list-style: none; padding: 0;">
+        <li>Montant Brut : ${new Intl.NumberFormat('fr-FR').format(params.grossAmount)} XOF</li>
+        <li>Frais Plateforme : -${new Intl.NumberFormat('fr-FR').format(params.platformFee)} XOF</li>
+        <li>Frais Techniques : -${new Intl.NumberFormat('fr-FR').format(params.techFee)} XOF</li>
+        <li style="border-top: 1px solid #ddd; margin-top: 10px; padding-top: 10px;"><strong>Montant Net à recevoir : ${new Intl.NumberFormat('fr-FR').format(params.amount)} XOF</strong></li>
+      </ul>
+      <p style="margin: 10px 0 0 0;">Mode : ${params.method}</p>
+    </div>
+    <p>Notre équipe valide actuellement votre demande. Vous recevrez un email dès que les fonds seront envoyés. ✨</p>
+  `;
+
+  return transporter.sendMail({
+    from: process.env.SMTP_FROM,
+    to: params.to,
+    subject: `Demande de retrait reçue - ${APP_NAME}`,
+    html: getHtmlTemplate(title, content, "Suivre mon retrait", `${process.env.NEXTAUTH_URL}/dashboard`),
+  });
+}
