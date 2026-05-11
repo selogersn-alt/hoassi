@@ -1,4 +1,9 @@
-import { Suspense } from "react";
+"use client";
+
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { User, Zap, UserPlus, Mail, Lock } from "lucide-react";
 
 function SignupForm() {
   const router = useRouter();
