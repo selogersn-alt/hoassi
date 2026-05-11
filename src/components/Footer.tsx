@@ -32,15 +32,17 @@ export default function Footer() {
 
           <div>
             <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6">Légal & Éthique</h4>
-            <div className="bg-slate-800/50 p-4 rounded-2xl border border-white/5">
-               <div className="flex items-center gap-2 text-amber-500 mb-2">
-                 <AlertTriangle className="w-4 h-4" />
-                 <span className="text-[10px] font-black uppercase">Charte d'Utilisation</span>
-               </div>
-               <p className="text-[10px] leading-relaxed text-slate-500">
-                 Interdiction stricte des cagnottes à des fins <span className="text-slate-300">politiques, électorales, blanchiment d'argent</span> ou issues de crimes. Tout abus sera signalé.
-               </p>
-            </div>
+            <Link href="/charte" className="block group">
+              <div className="bg-slate-800/50 p-4 rounded-2xl border border-white/5 transition-all group-hover:border-amber-500/50">
+                 <div className="flex items-center gap-2 text-amber-500 mb-2">
+                   <AlertTriangle className="w-4 h-4" />
+                   <span className="text-[10px] font-black uppercase">Charte d'Utilisation</span>
+                 </div>
+                 <p className="text-[10px] leading-relaxed text-slate-500 group-hover:text-slate-400">
+                   Interdiction stricte des cagnottes à des fins <span className="text-slate-300">politiques, électorales, blanchiment d'argent</span> ou issues de crimes. Tout abus sera signalé.
+                 </p>
+              </div>
+            </Link>
           </div>
         </div>
         
@@ -49,9 +51,9 @@ export default function Footer() {
             © 2026 HOASSI - Propulsé par Digitalh. Tous droits réservés.
           </p>
           <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest">
-             <Link href="#" className="hover:text-white">Confidentialité</Link>
-             <Link href="#" className="hover:text-white">CGU</Link>
-             <Link href="#" className="hover:text-white">Support</Link>
+             <Link href="/privacy" className="hover:text-white transition-colors">Confidentialité</Link>
+             <Link href="/cgu" className="hover:text-white transition-colors">CGU</Link>
+             <Link href="/support" className="hover:text-white transition-colors">Support</Link>
           </div>
         </div>
       </div>

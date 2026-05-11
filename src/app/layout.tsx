@@ -15,7 +15,14 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
   title: {
     default: "HOASSI | Excellence Crowdfunding Togo - Soutien & Solidarité",
     template: "%s | HOASSI Togo"
@@ -50,11 +57,6 @@ export const metadata: Metadata = {
     title: "HOASSI | Excellence Crowdfunding Togo",
     description: "Financez l'avenir du Togo en toute sécurité.",
     images: ["/og-image.jpg"],
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
   },
   icons: {
     icon: "/logo.png",

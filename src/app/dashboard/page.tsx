@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import DashboardClient from "./DashboardClient";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -55,6 +56,7 @@ export default async function DashboardPage() {
   return (
     <main className="min-h-screen bg-slate-50 pt-32 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+        <Breadcrumbs />
         <div className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-4xl font-black text-slate-900 tracking-tight">Tableau de bord</h1>

@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import Navbar from "@/components/Navbar";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { notFound } from "next/navigation";
 import DonationForm from "./DonationForm";
 import ShareProject from "./ShareProject";
@@ -65,6 +66,7 @@ export default async function ProjectDetails({ params }: { params: Promise<{ id:
       <Navbar />
       
       <main className="flex-grow pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <Breadcrumbs />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
           {/* Colonne Principale: Image, Titre, Description, Commentaires */}

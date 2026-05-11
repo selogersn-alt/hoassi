@@ -3,7 +3,7 @@ import { ArrowRight, Globe, ShieldCheck, Zap } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center px-4 pt-32 pb-24 sm:px-6 lg:px-8 overflow-hidden bg-slate-900 font-sans">
+    <section className="relative min-h-[90vh] flex items-center px-4 pt-40 pb-24 sm:px-6 lg:px-8 overflow-hidden bg-slate-900 font-sans">
       {/* Premium Background with Image and Patterns */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -23,7 +23,7 @@ export default function Hero() {
             <span className="text-xs font-bold uppercase tracking-widest text-amber-500">Le Crowdfunding d'Excellence au Togo</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1] animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1] animate-slide-up" style={{ animationDelay: '0.1s' }}>
             Donnez du souffle <br />
             à vos <span className="font-serif italic text-amber-500">ambitions</span>
           </h1>
