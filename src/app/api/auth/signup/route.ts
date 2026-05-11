@@ -48,7 +48,8 @@ export async function POST(request: Request) {
           fullname: name,
           email: email,
           bio: "Nouveau membre influenceur",
-          cni: "A fournir",
+          cniFront: "A fournir",
+          cniBack: "A fournir",
           phone: "A fournir",
           image: "/avatar.png"
         }
