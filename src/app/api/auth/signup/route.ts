@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, password, role } = body;
+    const { name, email, password, role, referralBy } = body;
 
     if (!email || !password || !name) {
       return NextResponse.json({ error: "Tous les champs sont requis" }, { status: 400 });
