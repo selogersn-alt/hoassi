@@ -33,7 +33,8 @@ export async function POST(request: Request) {
         image: body.image,
         socialLink: body.socialLink || null,
         phone: body.phone,
-        cni: body.cni,
+        cniFront: body.cni,
+        cniBack: "A fournir",
       },
     });
 
